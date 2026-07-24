@@ -1,0 +1,27 @@
+name: Backend Build
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+  workflow_dispatch:
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v3
+      - name: Run Build
+        run: |
+          cd backend
+          npm install
+          npm start &
+          npm run test
+      # - name: Install dependencies
+      #   run: npm install
+      # - name: Run tests
+      #   run: npm run test
+      # - name: Run coverage
+      #   run: npm run ts-node-coverage
+      # - name: Linting
+      # run: npm run lint
